@@ -1,5 +1,8 @@
 # VisionBoard AI Service
 
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green) 
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
+
 VisionBoard AI Service enhances goal tracking through intelligent, cloud-native microservices powered by open-source AI models.
 
 Designed to showcase full-stack AI architecture skills — from NLP to prediction modeling — this project bridges technology and real-world outcomes with clarity, trust, and purpose.
