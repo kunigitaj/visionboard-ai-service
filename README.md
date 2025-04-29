@@ -1,31 +1,37 @@
 # VisionBoard AI Service
 
-![Node.js](https://img.shields.io/badge/Node.js-18.x-green) 
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green)  
 ![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
 
-VisionBoard AI Service enhances goal tracking through intelligent, cloud-native microservices powered by open-source AI models.
+VisionBoard AI Service empowers users to expand, motivate, and predict goal success through cutting-edge AI-powered APIs.  
+Leveraging state-of-the-art NLP and predictive modeling, this cloud-native microservice suite transforms simple goal descriptions into actionable plans, insightful sentiments, relevant keywords, and success predictions—all designed to inspire and guide personal growth.
 
-Designed to showcase full-stack AI architecture skills — from NLP to prediction modeling — this project bridges technology and real-world outcomes with clarity, trust, and purpose.
+Designed for clarity, scalability, and real-world impact, VisionBoard bridges AI technology and meaningful user experiences.
 
 ---
 
-## Why This Project Matters
+## Architecture Overview
 
-- **Real-World Utility**: Practical APIs to enrich goal setting and personal growth applications.
-- **Cloud-Native Design**: Built to run as lightweight, scalable microservices.
-- **Modern AI Usage**: Combines NLP, sentiment analysis, predictive modeling, and text generation.
-- **Production-Ready**: Dockerized, documented, and easily extendable for real-world deployment.
+VisionBoard AI Service is composed of modular microservices, each responsible for a core AI function:
+
+- **Goal Expansion Module**: Transforms brief goals into detailed, motivational plans using GPT-2 Large.
+- **Sentiment Analysis Module**: Detects emotional tone with MiniLM-based classifiers.
+- **Keyword Extraction Module**: Identifies key themes via KeyBERT.
+- **Progress Prediction Module**: Predicts goal completion likelihood using Scikit-learn models.
+- **Goal Rephrasing Module**: Enhances motivation by rewriting goals in inspiring tones.
+
+Each module communicates via RESTful APIs, allowing independent scaling and easy integration.
 
 ---
 
 ## Built With
 
-- **FastAPI** – high-performance Python API framework
-- **Hugging Face Transformers** – NLP models (T5, DistilBERT, GPT-2)
-- **KeyBERT** – keyword extraction
-- **Scikit-learn** – predictive modeling
-- **Docker** – containerization ready
-- **Uvicorn** – ASGI server
+- **FastAPI** – High-performance Python API framework  
+- **Hugging Face Transformers** – GPT-2 Large, MiniLM for NLP tasks  
+- **KeyBERT** – Keyword extraction using BERT embeddings  
+- **Scikit-learn** – Predictive modeling  
+- **Docker** – Containerization for deployment  
+- **Uvicorn** – ASGI server for high-performance serving  
 
 ---
 
@@ -47,10 +53,11 @@ Access the API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ### 1. Goal Expansion API
 
-- **Endpoint**: `POST /generate_goal_plan`
-- **Description**: Expands a short goal description into a detailed, motivational step-by-step plan to guide achievement.
+- **Endpoint**: `POST /generate_goal_plan`  
+- _Expands a short goal description into a detailed, motivational step-by-step plan._
 
 **Example Request:**
+
 ```bash
 curl -X POST http://localhost:8000/generate_goal_plan \
 -H "Content-Type: application/json" \
@@ -59,12 +66,13 @@ curl -X POST http://localhost:8000/generate_goal_plan \
 
 ---
 
-### 2. Goal Sentiment Analysis API
+### 2. Sentiment Analysis API
 
-- **Endpoint**: `POST /sentiment`
-- **Description**: Detects emotional tone (positive/negative) in goal descriptions.
+- **Endpoint**: `POST /sentiment`  
+- _Analyzes emotional tone (positive/negative) in goal descriptions._
 
 **Example Request:**
+
 ```bash
 curl -X POST http://localhost:8000/sentiment \
 -H "Content-Type: application/json" \
@@ -73,12 +81,13 @@ curl -X POST http://localhost:8000/sentiment \
 
 ---
 
-### 3. Goal Tagging (Keyword Extraction API)
+### 3. Keyword Extraction API
 
-- **Endpoint**: `POST /keywords`
-- **Description**: Extracts key themes or concepts from a goal description.
+- **Endpoint**: `POST /keywords`  
+- _Extracts key themes or concepts from a goal description._
 
 **Example Request:**
+
 ```bash
 curl -X POST http://localhost:8000/keywords \
 -H "Content-Type: application/json" \
@@ -87,12 +96,13 @@ curl -X POST http://localhost:8000/keywords \
 
 ---
 
-### 4. Vision Progress Prediction API
+### 4. Progress Prediction API
 
-- **Endpoint**: `POST /predict`
-- **Description**: Predicts the likelihood of completing a goal based on text metadata.
+- **Endpoint**: `POST /predict`  
+- _Predicts the likelihood of completing a goal based on text metadata._
 
 **Example Request:**
+
 ```bash
 curl -X POST http://localhost:8000/predict \
 -H "Content-Type: application/json" \
@@ -101,12 +111,13 @@ curl -X POST http://localhost:8000/predict \
 
 ---
 
-### 5. Goal Rephrasing for Motivation API
+### 5. Goal Rephrasing API
 
-- **Endpoint**: `POST /rephrase`
-- **Description**: Rewrites goal descriptions into motivational, inspiring tones.
+- **Endpoint**: `POST /rephrase`  
+- _Rewrites goal descriptions into motivational, inspiring tones._
 
 **Example Request:**
+
 ```bash
 curl -X POST http://localhost:8000/rephrase \
 -H "Content-Type: application/json" \
@@ -127,63 +138,72 @@ Explore endpoints, test APIs, and review expected inputs and outputs directly in
 
 ## Demo Commands
 
-Quickly test the APIs locally with these examples:
+Quickly test VisionBoard AI Service's capabilities:
+
+### Goal Expansion & Motivation
 
 ```bash
-# 1. Expand a Goal
+# Expand a Goal into a Detailed Plan
 curl -X POST http://localhost:8000/generate_goal_plan \
 -H "Content-Type: application/json" \
 -d '{"text": "Run a marathon"}'
 
-# 2. Analyze Sentiment of a Goal
-curl -X POST http://localhost:8000/sentiment \
--H "Content-Type: application/json" \
--d '{"text": "I am excited to start my journey of learning new skills!"}'
-
-# 3. Extract Keywords from a Goal
-curl -X POST http://localhost:8000/keywords \
--H "Content-Type: application/json" \
--d '{"text": "Learn Python programming, data science, and machine learning."}'
-
-# 4. Predict Goal Completion Likelihood
-curl -X POST http://localhost:8000/predict \
--H "Content-Type: application/json" \
--d '{"title": "Write a technical blog", "description": "Publish one new blog post every week for six months."}'
-
-# 5. Rephrase a Goal to be More Motivating
+# Rephrase a Goal to be More Motivating
 curl -X POST http://localhost:8000/rephrase \
 -H "Content-Type: application/json" \
 -d '{"text": "Start exercising regularly to improve health."}'
 ```
 
-Each command **showcases** a key AI-powered feature of the VisionBoard AI Service.
+### Sentiment Analysis & Keyword Extraction
+
+```bash
+# Analyze Sentiment of a Goal
+curl -X POST http://localhost:8000/sentiment \
+-H "Content-Type: application/json" \
+-d '{"text": "I am excited to start my journey of learning new skills!"}'
+
+# Extract Keywords from a Goal
+curl -X POST http://localhost:8000/keywords \
+-H "Content-Type: application/json" \
+-d '{"text": "Learn Python programming, data science, and machine learning."}'
+```
+
+### Progress Prediction
+
+```bash
+# Predict Goal Completion Likelihood
+curl -X POST http://localhost:8000/predict \
+-H "Content-Type: application/json" \
+-d '{"title": "Write a technical blog", "description": "Publish one new blog post every week for six months."}'
+```
 
 ---
 
 ## VisionBoard AI Service: At a Glance
 
-- **Purpose**: Expand, motivate, and predict goal success using AI-powered APIs.
-- **Tech Stack**: FastAPI · Hugging Face · KeyBERT · Scikit-learn · Docker
-- **Style**: Cloud-native, modular, lightweight microservices.
-- **Impact**: Empowers smarter, more inspiring personal growth journeys.
+- **Purpose**: Expand, motivate, and predict goal success through AI-powered APIs.  
+- **Tech Stack**: FastAPI · Hugging Face Transformers (GPT-2 Large, MiniLM) · KeyBERT · Scikit-learn · Docker  
+- **Style**: Cloud-native, modular, lightweight microservices  
+- **Impact**: Empowers smarter, more inspiring personal growth journeys
 
 ---
 
 ## License
 
-The content and source code in this project are the intellectual property of Kunigitaj. Unauthorized reproduction, modification, or distribution without express permission is strictly prohibited.
+The content and source code in this project are the intellectual property of Kunigitaj.  
+Unauthorized reproduction, modification, distribution, or commercial use without express permission is prohibited.
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/), allowing non-commercial use with attribution.
+This work is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
 
-Users are free to remix, adapt, and build upon this work non-commercially, provided they credit Kunigitaj and license their new creations under identical terms.
+You may remix, adapt, and build upon this work non-commercially, provided you credit Kunigitaj and license your new creations under identical terms.
 
 ---
 
 ## Special Thanks
 
-- Hugging Face
-- KeyBERT
-- Scikit-learn
-- FastAPI
+- **Hugging Face**  
+- **KeyBERT**  
+- **Scikit-learn**  
+- **FastAPI**
 
 ---

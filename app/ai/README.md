@@ -2,19 +2,25 @@
 
 This directory (`app/ai/`) contains all the AI-powered modules used by the VisionBoard AI Service.
 
-Each module is designed to be lightweight, modular, and production-ready, supporting cloud-native FastAPI endpoints.
+Each module is designed to be lightweight, modular, and optimized for scalable FastAPI microservices, enabling real-time goal enhancement in a cloud-native architecture.
+
+---
+
+## Architecture Overview
+
+VisionBoard AI packages intelligent NLP pipelines into modular FastAPI endpoints, enabling goal setting, analysis, and motivation through cloud-native microservices.
 
 ---
 
 ## Modules Overview
 
-| Module               | Description |
-| -------------------- | ----------- |
-| `summarization.py`    | Summarizes goal descriptions into concise, action-focused text (Hugging Face T5-small). |
-| `sentiment.py`        | Analyzes emotional tone (positive/negative) in text (DistilBERT). |
-| `keywords.py`         | Extracts keywords or key phrases from goal descriptions (KeyBERT + SentenceTransformers). |
-| `predict.py`          | Predicts goal success probability based on text length using a simple linear regression model (scikit-learn). |
-| `rephrase.py`         | Rewrites goal descriptions into motivational sentences (GPT-2). |
+| Module                | Description |
+| --------------------- | ----------- |
+| `goal_expansion.py`    | Expands short goals into detailed, motivational plans (GPT-2 Large - lightweight but powerful). |
+| `sentiment.py`         | Analyzes emotional tone (positive/negative) in text (DistilBERT). |
+| `keywords.py`          | Extracts keywords or key phrases from goal descriptions (KeyBERT + SentenceTransformers). |
+| `predict.py`           | Predicts goal success probability based on text embeddings (scikit-learn). |
+| `rephrase.py`          | Rewrites goal descriptions into motivational sentences (GPT-2). |
 
 ---
 
@@ -22,7 +28,7 @@ Each module is designed to be lightweight, modular, and production-ready, suppor
 
 | Task                     | Model / Library                                   | Purpose                                         |
 |---------------------------|---------------------------------------------------|-------------------------------------------------|
-| Summarization             | `t5-small` via Hugging Face `transformers`        | Summarize goals into clear action items         |
+| Goal Expansion            | `gpt2-large` (small enough for local serving, powerful enough for inspiring outputs) via Hugging Face `transformers`      | Expand short goals into detailed action plans   |
 | Sentiment Analysis        | `distilbert-base-uncased-finetuned-sst-2-english` | Detect emotional tone of goals                  |
 | Keyword Extraction        | `KeyBERT` + `all-MiniLM-L6-v2` SentenceTransformer| Extract key themes and concepts from text       |
 | Progress Prediction       | `LinearRegression` (Scikit-learn)                 | Predict likelihood of goal completion           |
@@ -33,8 +39,8 @@ Each module is designed to be lightweight, modular, and production-ready, suppor
 ## Example Usage
 
 ```python
-from app.ai.summarization import summarize_text
-print(summarize_text("Train for six months to run a marathon next year."))
+from app.ai.goal_expansion import generate_goal_plan
+print(generate_goal_plan("Run a marathon"))
 
 from app.ai.sentiment import analyze_sentiment
 print(analyze_sentiment("I am excited about my journey!"))
@@ -64,5 +70,7 @@ print(rephrase_goal("Start running regularly."))
 
 This directory and its contents follow the VisionBoard project license:  
 [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+Unauthorized commercial use is prohibited.
 
 ---
